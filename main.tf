@@ -16,7 +16,7 @@ provider "dominos" {
   credit_card {
     number = 123456789101112
     cvv    = 1314
-    date   = "1516"
+    date   = "15/16"
     zip    = 18192
   }
 }
@@ -28,12 +28,8 @@ data "dominos_address" "addr" {
   zip         = "97124"
 }
 
-output "OrderOutput" {
-  value = data.dominos_address.addr.url_object
-}
-
 data "dominos_store" "store" {
-  address_url_object = data.dominos_address.addr.url_object
+  address_url_object = "{\"line1\":\"6199 NE Alber st\",\"line2\":\"Hillsboro OR 97124\"}" //data.dominos_address.addr.url_object
 }
 
 # data "dominos_menu_item" "item" {
