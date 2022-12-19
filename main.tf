@@ -14,26 +14,30 @@ provider "dominos" {
   phone_number  = "15555555555"
 
   credit_card {
-    number = 123456789101112
-    cvv    = 1314
-    date   = "15/16"
-    zip    = 18192
+    number = var.card["number"]
+    cvv    = var.card["cvv"]
+    date   = var.card["date"]
+    zip    = var.card["zip"]
   }
 }
 
 data "dominos_address" "addr" {
-  street      = "6199 NE Alber st"
-  city        = "Hillsboro"
-  state       = "OR"
-  zip         = "97124"
+  street      = var.address["street"]
+  city        = var.address["city"]
+  state       = var.address["state"]
+  zip         = var.address["zip"]
 }
 
-data "dominos_store" "store" {
-  address_url_object = "{\"line1\":\"6199 NE Alber st\",\"line2\":\"Hillsboro OR 97124\"}" //data.dominos_address.addr.url_object
+output "AddressData" {
+  value = data.dominos_address.addr
 }
+
+# data "dominos_store" "store" {
+#   address_url_object = "{\"line1\":\"6199 NE Alber st\",\"line2\":\"Hillsboro OR 97124\"}" //data.dominos_address.addr.url_object
+# }
 
 # data "dominos_menu_item" "item" {
-#   store_id     = data.dominos_store.store.store_id
+#   store_id     = 7218
 #   query_string = ["philly", "medium"]
 # }
 
